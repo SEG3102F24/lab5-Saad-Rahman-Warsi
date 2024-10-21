@@ -65,6 +65,7 @@ export class EmployeeService {
       //"name": "San Francisco"});*/
       //emplist.push(employee)
       await update(ref(db,"Employees/"+employee.name),employee)
+      this.getEmp()
       
   }
 
@@ -73,12 +74,15 @@ export class EmployeeService {
     get(child(dbref,"Employees/")).
     then((snapshot)=>
       {
+        
         if (snapshot.exists())
         {
+          //emplist=[]
           var x=snapshot.val()
+          console.log("x=",x)
           for (var ttt in x)
           {
-            //console.log(ttt)
+            console.log(ttt)
             //console.log(x.valueOf(ttt))
             //console.log("value of value of",x.valueOf(ttt).valueOf(name))
             
