@@ -11,5 +11,17 @@ import { NgFor, AsyncPipe, DatePipe } from '@angular/common';
     imports: [RouterLink, NgFor, AsyncPipe, DatePipe]
 })
 export class EmployeesComponent {
+  lis:any;
+  constructor(private service:EmployeeService)
+    {
+
+    }
+
+    ngOnInit()
+    {
+      this.service.getEmp().subscribe((data:any)=>{this.lis=data
+        console.log(this.lis)
+      })
+    }
   protected employees: EmployeeService = inject(EmployeeService);
 }
