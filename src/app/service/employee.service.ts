@@ -65,7 +65,7 @@ export class EmployeeService {
       //"name": "San Francisco"});*/
       //emplist.push(employee)
       await update(ref(db,"Employees/"+employee.name),employee)
-      this.getEmp()
+      //this.getEmp()
       
   }
 
@@ -80,15 +80,19 @@ export class EmployeeService {
           //emplist=[]
           var x=snapshot.val()
           console.log("x=",x)
+          //emplist=[]
           for (var ttt in x)
           {
             console.log(ttt)
             //console.log(x.valueOf(ttt))
             //console.log("value of value of",x.valueOf(ttt).valueOf(name))
-            
+            console.log(emplist)
+            if (!exists(ttt))
+            {
             emplist.push(new Employee(ttt,x[ttt]["dateOfBirth"],x[ttt]["city"],x[ttt]["salary"],x[ttt]["gender"],x[ttt]["email"]))
+            }
           }
-          emplist=x as Employee[]
+          //emplist=x as Employee[]
           console.log(emplist)
         }
       })
@@ -96,4 +100,19 @@ export class EmployeeService {
       console.log("emplist=",emplist)
       return this.selected;
   }
+}
+
+function exists(ex:any): Boolean 
+{
+   var x:Boolean=false;
+   for (var ttt of emplist)
+   {
+    console.log("ttt=",ttt["name"])
+    console.log("ex=",ex)
+    if (ttt["name"]==ex)
+    {
+      x=true;
+    }
+   }
+  return x;
 }
